@@ -16,6 +16,9 @@ Esta es una aplicación desarrollada como parte de la prueba técnica para el ca
 
 ## Implementación local:
 `git clone https://github.com/amosquerare/task-management.git`
+
 `cd task-management`
+
 `npm install`
+
 `ng serve -o`
