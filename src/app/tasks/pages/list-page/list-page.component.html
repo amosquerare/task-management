@@ -1,0 +1,35 @@
+<h1>Lista de Tareas</h1>
+
+<div>
+  <mat-button-toggle-group 
+    name="taskFilter" 
+    [(ngModel)]="filterStatus" 
+    aria-label="Task Filter">
+    <mat-button-toggle value="Todos">Todos</mat-button-toggle>
+    <mat-button-toggle value="Pendientes">Pendientes</mat-button-toggle>
+    <mat-button-toggle value="Completadas">Completadas</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+
+<div *ngFor="let task of filterTasks(); let i = index" class="task-container">
+  <div class="task">
+    <input type="checkbox" [checked]="task.state === 'Completada'" (change)="onCheckChange($event, task)">
+    <h3>{{ task.taskName }} (Fecha límite: {{ task.deadline | date:'shortDate' }})</h3>
+  </div>
+  <hr>
+  <h3 *ngIf="task.persons.length > 0; else elseTemplate ">Personas asociadas: </h3>
+  <ng-template #elseTemplate>
+    <h3>No hay personas asociadas a esta tarea</h3>
+  </ng-template>
+  <div class="person" *ngFor="let person of task.persons">
+    <p>- {{ person.name }} ({{ person.age }} años)</p>
+    <span>Habilidades: </span>
+    <span *ngFor="let skill of person.skills; let last= last">
+      {{ skill }}<span *ngIf="!last">,</span>
+    </span>
+  </div>
+</div>
+
+<div *ngIf="tasks.length === 0">
+  <p>No hay tareas guardadas.</p>
+</div>

@@ -1,0 +1,14 @@
+    <div class="sidebar" [ngClass]="{'compacted': compacted}">
+
+        <div class="sidebar-header">
+        <h2>Menú</h2>
+        <button class="toggle-btn" (click)="toggle()" >☰</button>
+        </div>
+    
+        <ul class="sidebar-nav">
+        <li *ngFor="let item of sidebarItems"><a (click)="toggle()" [routerLink]="item.router" routerLinkActive="active"> {{ item.title}}</a></li>
+
+        </ul>
+
+    </div>
+    

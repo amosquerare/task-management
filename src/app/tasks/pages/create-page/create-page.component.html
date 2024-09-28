@@ -1,0 +1,65 @@
+<h1>Crear nueva tarea</h1>
+
+<form [formGroup]="myTask">
+    <div class="input-container">
+        <label for="taskname"> Nombre de la tarea: </label>
+        <input formControlName="taskName" id="taskname" type="text"
+            [ngClass]="{'invalid':isInvalidTaskField('taskName')}">
+        <span class="error" *ngIf="isInvalidTaskField('taskName')"> Este campo requerido</span>
+    </div>
+    <div class="input-container">
+        <label for="deadline"> Fecha limite: </label>
+        <input formControlName="deadline" id="deadline" type="date" [min]="today"
+            [ngClass]="{'invalid':isInvalidTaskField('deadline')}">
+        <span class="error" *ngIf="isInvalidTaskField('deadline')">Este campo es requerido</span>
+    </div>
+    <div class="associated-container">
+        <div formArrayName="persons" class="associated">
+            <h2>Personas asociadas:</h2>
+            <mat-chip-set>
+                <mat-chip *ngFor="let person of getPersons.controls; let i = index"
+                    (click)="onSelectPerson( person, i )">
+                    {{ person.get('name')?.value }}
+                </mat-chip>
+            </mat-chip-set>
+        </div>
+        <p class="error" *ngIf="isInvalidTaskField('persons')">No hay personas asociadas</p>
+    </div>
+
+</form>
+
+<form [formGroup]="person">
+
+    <div class="input-container">
+        <label for="name"> Nombre completo </label>
+        <input formControlName="name" id="name" type="text">
+        <span class="error" *ngIf="isInvalidPersonField('name')"> {{ messageByError( person.get('name')?.errors )}} </span>
+    </div>
+
+    <div class="input-container">
+        <label for="edad"> Edad</label>
+        <input formControlName="age" id="edad" type="number">
+        <span class="error" *ngIf="isInvalidPersonField('age')"> {{ messageByError( person.get('age')?.errors )}} </span>
+    </div>
+
+    <div class="skills-container">
+        <h3>Habilidades</h3>
+        <div class="skill">
+            <input [formControl]="newSkill" type="text">
+            <button mat-raised-button (click)="onAddSkill()">Añadir habilidad</button>
+        </div>
+        <p class="error" *ngIf="isInvalidPersonField('skills')"> Debe haber al menos una habilidad</p>
+
+        <div formArrayName="skills" *ngFor="let skill of getSkills.controls; let i = index">
+            <input type="text" [formControlName]="i">
+            <button mat-raised-button (click)="onDeleteSkill(i)">Eliminar habilidad</button>
+        </div>
+
+        <div class="associated-manager">
+            <button mat-raised-button (click)="onAddPerson()">Añadir persona</button>
+            <button mat-raised-button (click)="onDeletePerson()">Eliminar persona</button>
+        </div>
+
+        <button mat-raised-button (click)="onClickSave()">Guardar tarea</button>
+    </div>
+</form>

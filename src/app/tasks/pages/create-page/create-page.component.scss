@@ -1,0 +1,46 @@
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .input-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    input{
+        max-width: 400px;
+    }
+    .associated-container{
+        margin-bottom: 20px;
+    }
+    .associated{
+        display: flex;
+        gap: 10px;
+    }
+    .error{
+        color: rgb(173, 49, 49);
+    }
+
+    .person{
+        cursor: pointer;
+    }
+
+    .skills-container{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .skill{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .associated-manager{
+        display: flex;
+        gap: 20px;
+    }
+
+}

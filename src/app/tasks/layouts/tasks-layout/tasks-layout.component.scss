@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    height: 100vh;
+    flex-direction: row;
+    main{
+        width: 100%;
+        padding: 30px;
+        height: 100%;
+        border: 1px solid #dfe7ef;
+        overflow-y: scroll;
+    }
+}
+@media (max-width:768px ) {
+
+    .container{
+        flex-direction: column;
+        main{
+            margin: 0;
+            border-radius: 0
+        }
+    };
+  }
